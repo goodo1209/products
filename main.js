@@ -52,6 +52,29 @@ customElements.define('lotto-numbers', LottoNumbers);
 const generateBtn = document.getElementById('generate-btn');
 const historyList = document.getElementById('history-list');
 const lottoNumbersElement = document.querySelector('lotto-numbers');
+const themeToggle = document.getElementById('theme-toggle');
+
+// Theme Management
+function initTheme() {
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+        document.body.classList.add('dark-mode');
+        themeToggle.textContent = '☀️';
+    } else {
+        themeToggle.textContent = '🌙';
+    }
+}
+
+themeToggle.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+    const isDark = document.body.classList.contains('dark-mode');
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    themeToggle.textContent = isDark ? '☀️' : '🌙';
+});
+
+initTheme();
 
 let history = [];
 
