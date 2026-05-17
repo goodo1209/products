@@ -11,6 +11,7 @@ This is a web application that recommends lottery numbers. It provides a fun and
 *   **Number Display:** Display the generated numbers in a visually appealing way.
 *   **History:** Keep a history of previously generated numbers.
 *   **Responsive Design:** The application is responsive and works on both desktop and mobile devices.
+*   **Google AdSense:** Integrated AdSense for monetization.
 
 ## Current Plan
 
