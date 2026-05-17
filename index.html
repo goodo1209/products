@@ -5,20 +5,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lotto Number Generator</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
 </head>
 <body>
     <div class="container">
         <button id="theme-toggle" aria-label="Toggle dark mode">🌙</button>
-        <h1>Lotto Number Generator</h1>
-        <div class="number-display">
-            <lotto-numbers></lotto-numbers>
-        </div>
-        <button id="generate-btn">Generate Numbers</button>
-        <div class="history">
-            <h2>History</h2>
-            <ul id="history-list"></ul>
-        </div>
-        <div class="contact-form">
+        
+        <section class="lotto-section">
+            <h1>Lotto Number Generator</h1>
+            <div class="number-display">
+                <lotto-numbers></lotto-numbers>
+            </div>
+            <button id="generate-btn">Generate Numbers</button>
+            <div class="history">
+                <h2>History</h2>
+                <ul id="history-list"></ul>
+            </div>
+        </section>
+
+        <section class="animal-test-section">
+            <hr class="section-divider">
+            <h1>Animal Face Test (Dog vs Cat)</h1>
+            <div class="upload-area">
+                <input type="file" id="image-upload" accept="image/*" hidden>
+                <button id="upload-btn">Upload Face Photo</button>
+                <div id="image-preview-container" class="hidden">
+                    <img id="face-preview" src="" alt="Face Preview">
+                </div>
+            </div>
+            <div id="result-container" class="hidden">
+                <h2 id="prediction-text">Analyzing...</h2>
+                <div class="progress-bars" id="label-container">
+                    <!-- Results will be injected here -->
+                </div>
+            </div>
+        </section>
+
+        <section class="contact-section">
+            <hr class="section-divider">
+            <div class="contact-form">
             <h2>Partnership Inquiry</h2>
             <form action="https://formspree.io/f/mvzyprjo" method="POST">
                 <div class="form-group">

@@ -160,6 +160,98 @@ h1 {
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 10;
+}
+
+.section-divider {
+    margin: 2.5rem 0;
+    border: none;
+    border-top: 1px solid var(--border-color);
+}
+
+.animal-test-section {
+    margin-top: 1rem;
+}
+
+.upload-area {
+    margin: 1.5rem 0;
+}
+
+#upload-btn {
+    background-color: var(--primary-color);
+    color: #fff;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#image-preview-container {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: center;
+}
+
+#face-preview {
+    max-width: 100%;
+    max-height: 300px;
+    border-radius: 1rem;
+    box-shadow: 0 4px 10px var(--shadow-color);
+}
+
+.hidden {
+    display: none !important;
+}
+
+#result-container {
+    margin-top: 2rem;
+}
+
+#prediction-text {
+    margin-bottom: 1.5rem;
+    font-size: 1.25rem;
+}
+
+.progress-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.bar-container {
+    background-color: var(--bg-color);
+    border-radius: 1rem;
+    height: 25px;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.bar-fill {
+    height: 100%;
+    background-color: var(--primary-color);
+    transition: width 0.5s ease-out;
+}
+
+.bar-label {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+.bar-percent {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: var(--text-color);
 }
 
 @media (max-width: 480px) {

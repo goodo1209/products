@@ -102,3 +102,72 @@ function addToHistory(numbers) {
 generateBtn.addEventListener('click', generateNumbers);
 
 generateNumbers();
+
+// Animal Face Test Logic
+const URL = "https://teachablemachine.withgoogle.com/models/liF0sV3RN/";
+let model, labelContainer, maxPredictions;
+
+const uploadBtn = document.getElementById('upload-btn');
+const imageUpload = document.getElementById('image-upload');
+const facePreview = document.getElementById('face-preview');
+const imagePreviewContainer = document.getElementById('image-preview-container');
+const resultContainer = document.getElementById('result-container');
+const predictionText = document.getElementById('prediction-text');
+const resultLabels = document.getElementById('label-container');
+
+async function initModel() {
+    const modelURL = URL + "model.json";
+    const metadataURL = URL + "metadata.json";
+    model = await tmImage.load(modelURL, metadataURL);
+    maxPredictions = model.getTotalClasses();
+}
+
+uploadBtn.addEventListener('click', () => imageUpload.click());
+
+imageUpload.addEventListener('change', async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = async (event) => {
+        facePreview.src = event.target.result;
+        imagePreviewContainer.classList.remove('hidden');
+        resultContainer.classList.remove('hidden');
+        predictionText.textContent = "Analyzing...";
+        resultLabels.innerHTML = '';
+        
+        // Ensure model is loaded
+        if (!model) await initModel();
+        
+        // Small delay to allow image to render
+        setTimeout(() => predict(), 100);
+    };
+    reader.readAsDataURL(file);
+});
+
+async function predict() {
+    const prediction = await model.predict(facePreview);
+    
+    // Sort by probability
+    prediction.sort((a, b) => b.probability - a.probability);
+    
+    const topResult = prediction[0];
+    predictionText.textContent = `You look like a ${topResult.className}!`;
+    
+    resultLabels.innerHTML = '';
+    for (let i = 0; i < maxPredictions; i++) {
+        const classPrediction = prediction[i];
+        const percent = (classPrediction.probability * 100).toFixed(0);
+        
+        const barHtml = `
+            <div class="bar-container">
+                <div class="bar-fill" style="width: ${percent}%"></div>
+                <span class="bar-label">${classPrediction.className}</span>
+                <span class="bar-percent">${percent}%</span>
+            </div>
+        `;
+        resultLabels.insertAdjacentHTML('beforeend', barHtml);
+    }
+}
+
+initModel();
